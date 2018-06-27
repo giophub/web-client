@@ -15,7 +15,7 @@ public class Main {
         BufferedReader bufferedReader = loader.loadAsBufferedReader("files/xml/basic/basic-xml-example.xml");
 
         Parser parser = new Parser();
-        parser.readFile(bufferedReader);
+        parser.readAsBufferedReader(bufferedReader);
     }
 
 

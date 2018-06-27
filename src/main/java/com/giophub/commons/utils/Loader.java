@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  * http://www.koders.com/java/fid5580570D56CD03F7E7ACF8C7968285B8673EA3D9.aspx
  */
 
-public class Loader {
+public class Loader { // todo : change the logic of this class
     private static final Logger LOGGER = LoggerFactory.getLogger(Loader.class);
 
 
