@@ -1,0 +1,8 @@
+{
+	"Application": "${project.name}",
+	"App.Version": "${project.version}.${Implementation-Build}",
+	"App.Environment": "${profile.env}",
+	"Build.timestamp": "${timestamp}",
+	"Default Log.level": "${log.level.val}",
+	"Default Log.dir": "${log.directory.val}"
+}

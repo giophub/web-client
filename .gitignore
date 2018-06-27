@@ -1,0 +1,9 @@
+.idea/
+/target/
+.classpath
+.project
+.settings/
+.tern-project
+/DELIVERY/
+/buildNumber.properties
+builNumber.properties
