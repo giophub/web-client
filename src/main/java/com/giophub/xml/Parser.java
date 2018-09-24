@@ -2,6 +2,7 @@ package com.giophub.xml;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.util.locale.provider.LocaleServiceProviderPool;
 
 import java.io.*;
 
@@ -11,10 +12,13 @@ public class Parser {
     public void Parser() {
     }
 
-    public void readAsBufferedReader(BufferedReader bufferedReader) {
+    public void asBufferedReader(BufferedReader bufferedReader) {
+        LOGGER.debug("Reading file as buffered reader");
         String line = null;
         try {
-            line = bufferedReader.readLine();
+            if (!bufferedReader.ready())
+                LOGGER.warn("The buffer reader is null or it is not ready !");
+
             while (null != (line = bufferedReader.readLine())) {
                 System.out.println(line);
             }
@@ -23,7 +27,7 @@ public class Parser {
         }
     }
 
-    public void readAsInputStream(InputStream inputStream) {
-        // todo
+    public void asInputStream(InputStreamReader inputStreamReader) {
+//        while (null != (line = FileInputStream(File file)))
     }
 }

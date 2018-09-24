@@ -2,12 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.giophub</groupId>
-    <artifactId>xml-tutorial</artifactId>
+    <artifactId>xml-http-client</artifactId>
     <packaging>jar</packaging> <!-- todo : change to war or something else -->
     <version>0.0.1</version>
     <name>${project.artifactId}</name>
-    <description>xml tutorial</description>
-    <url>http://maven.apache.org</url>
+    <description>xml http client</description>
 
     <!-- PROPERTIES -->
     <properties>
@@ -152,6 +151,9 @@
                 <directory>src/main/resources/properties</directory>
                 <filtering>true</filtering>
             </resource>-->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
 
         <plugins>
