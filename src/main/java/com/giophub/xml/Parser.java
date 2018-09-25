@@ -27,6 +27,24 @@ public class Parser {
         }
     }
 
+    public String asString(BufferedReader bufferedReader) {
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        try {
+            if (!bufferedReader.ready())
+                LOGGER.warn("The buffer reader is null or it is not ready !");
+
+            while (null != (line = bufferedReader.readLine())) {
+                sb.append(line);
+                sb.append("\n");
+            }
+        } catch (IOException e) {
+            LOGGER.error("Error on reading buffer\n" + e.getMessage());
+        }
+
+        return sb.toString();
+    }
+
     public void asInputStream(InputStreamReader inputStreamReader) {
 //        while (null != (line = FileInputStream(File file)))
     }

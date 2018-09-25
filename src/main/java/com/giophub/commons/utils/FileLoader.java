@@ -3,15 +3,13 @@ package com.giophub.commons.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class FileLoader {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileLoader.class);
 
     private FileReader reader;
+    private File input;
 
 
     public FileLoader load(String name) {
@@ -20,6 +18,7 @@ public class FileLoader {
 
 //        FileReader reader = null;
         try {
+            input = new File(name);
             reader = new FileReader(name);
         } catch (FileNotFoundException e) {
             LOGGER.error("Error on loading file: " + name + "\n" + e.getMessage());
@@ -44,9 +43,19 @@ public class FileLoader {
 
     }
 
+    public FileReader asFileReader() {
+        return reader;
+    }
+
     public BufferedReader asBufferedReader() {
         return new BufferedReader(reader);
     }
 
+
+
+
+    public File getInput() {
+        return input;
+    }
 
 }
