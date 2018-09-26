@@ -37,8 +37,8 @@ public class Main {
          * TODO 3 :*: call the web service / application
          * TODO 4 :*: get the response / content response
          * TODO 5 :*: save the content response on file / logfile
-         * TODO 6 :: track the response execution time
-         * TODO 7 :: schedule to run this application N-times with spring scheduler
+         * TODO 6 :*: track the response execution time
+         * TODO 7 :: schedule to run this application N-times with spring scheduler and count the request number
          * */
 
 

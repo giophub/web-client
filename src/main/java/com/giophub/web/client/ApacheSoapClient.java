@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.concurrent.TimeUnit;
 
 public class ApacheSoapClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(ApacheSoapClient.class);
@@ -36,6 +37,9 @@ public class ApacheSoapClient {
             httpPost.addHeader("Accept", "text/xml");
             httpPost.addHeader("SOAPAction", soapAction);
 //            httpPost.addHeader("Content-Disposition", "attachment; filename=\"export.xml\"");
+
+            // start to track the response time
+            long startTime = System.nanoTime();
 
             // Execute and get the response.
             CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
@@ -73,6 +77,11 @@ public class ApacheSoapClient {
             finally {
                 httpResponse.close();
             }
+
+            // stop to track response time
+            long endTime = System.nanoTime();
+            long processTime =  (endTime - startTime);
+            LOGGER.info("Response time: {} nano-seconds that is ~{} seconds", processTime, TimeUnit.NANOSECONDS.toSeconds(processTime));
 
         } catch (IOException e) {
             e.printStackTrace();
