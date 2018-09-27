@@ -10,18 +10,24 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.concurrent.TimeUnit;
+
 
 public class ApacheSoapClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(ApacheSoapClient.class);
+    private String uri;
+    private String soapAction;
+    private String soapXmlRequest;
 
     public ApacheSoapClient(String uri, String soapAction, String soapXmlRequest) {
+        this.uri = uri;
+        this.soapAction = soapAction;
+        this.soapXmlRequest = soapXmlRequest;
+    }
 
+    public void doCall() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         try {
             // Create a StringEntity for the SOAP XML.
@@ -93,7 +99,6 @@ public class ApacheSoapClient {
                 e.printStackTrace();
             }
         }
-
     }
 
 }

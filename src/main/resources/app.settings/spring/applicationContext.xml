@@ -9,19 +9,38 @@
       http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context-4.2.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:annotation-config/>
-
     <!-- Spring Listener -->
-    <!--<bean id="springCtxListener" class="com.mypkg.startup.SpringApplicationContextListener"/>-->
+    <!--<bean id="springCtxListener" class="com.giophub.startup.SpringApplicationContextListener"/>-->
 
+
+    <context:annotation-config />
+
+    <!--
+        COMPONENT SCAN
+            for quartz scheduler
+        -->
+    <!--<context:component-scan base-package="com.giophub.task" />-->
+
+    <!--
+        CONTEXT RESOURCES
+            to load properties files
+        -->
     <!-- load the file name of properties in Spring like a variable -->
     <!--<util:properties id="appProperties" location="classpath:app.settings/app.properties" />-->
 
     <!-- load properties files to retrieve configurations with the own key -->
     <context:property-placeholder location="classpath*:app.settings/app.properties"/>
 
-    <!-- Dependency Injection
-    @see com.mypkg.startup.CheckMountPoints class -->
+    <!--
+        SPRING RESOURCES
+            to load spring configuration files
+        -->
+    <!--<import resource="spring-quartz-context.xml" />-->
+
+    <!--
+        Dependency Injection
+            @see com.mypkg.startup.CheckMountPoints class
+        -->
     <!--<bean name="checkMountPoints" class="com.mypkg.startup.CheckMountPoints" init-method="init">-->
         <!--<constructor-arg name="fileDir" value="${file.dir}"/>   &lt;!&ndash; Constructor Type Injection &ndash;&gt;-->
         <!--<property name="tempDir" value="${temp.dir}"/> &lt;!&ndash; Setter Type Injection &ndash;&gt;-->

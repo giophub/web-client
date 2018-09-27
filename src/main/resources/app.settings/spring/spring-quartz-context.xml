@@ -1,0 +1,38 @@
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    &lt;!&ndash; Web clients &ndash;&gt;
+    <bean name="scheduledTasksJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="scheduledTasks"/>
+        <property name="targetMethod" value="ApacheSoapClientTask"/>
+    </bean>
+    <bean id="scheduledTasksTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="scheduledTasksJob"/>
+        <property name="cronExpression" value="${cache.cron.expression}"/>
+    </bean>
+
+    &lt;!&ndash; Scheduler properties &ndash;&gt;
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="scheduledTasksJob"/>
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="scheduledTasksTrigger"/>
+            </list>
+        </property>
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
+-->

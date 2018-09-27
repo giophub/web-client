@@ -18,7 +18,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
         <Implementation-Build>${buildNumber}</Implementation-Build>
-        <build.name>${project.name}_${profile.env}_${project.version}-${buildNumber}_${timestamp}</build.name>
+        <!--<build.name>${project.name}_${profile.env}_${project.version}-${buildNumber}_${timestamp}</build.name>-->
+        <build.name>${project.name}</build.name>
     </properties>
 
 
@@ -94,6 +95,11 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency> <!-- quartz scheduler -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -159,12 +165,12 @@
 
         <sourceDirectory>src/main/java/</sourceDirectory>
         <resources>
-            <!--<resource>
-                <directory>src/main/resources/properties</directory>
-                <filtering>true</filtering>
-            </resource>-->
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/app.settings/</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources/*</directory>
             </resource>
         </resources>
 
@@ -225,6 +231,46 @@
                     </webResources>
                 </configuration>
             </plugin>
+
+                <!--<plugin>
+                    &lt;!&ndash; Build an executable JAR &ndash;&gt;
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                                <mainClass>com.giophub.main.Main</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.giophub.main.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
         </plugins>
 
         <pluginManagement>
