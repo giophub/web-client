@@ -28,12 +28,8 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     // Input arguments
-//    public static String URI = "http://www.acceptance.ec.europa.eu/eurostat/SDMX/diss-ws/NSIStdV20Service";
-//    public static String URI = "http://158.166.164.77/eurostat/SDMX/diss-ws/NSIStdV20Service";
-//    public static String URI = "http://158.167.133.77/eurostat/SDMX/diss-ws/NSIStdV20Service";
-//    public static String URI = "http://ec.europa.eu/eurostat/SDMX/diss-ws/NSIStdV20Service";
     public static String URI = "http://localhost";
-    public static String INPUT_FILE = "test/basic-xml-example.xml";
+    public static String INPUT_FILE = "";
     public static String SOAP_ACTION = "";
 
     // fields
@@ -73,14 +69,11 @@ public class Main {
             System.exit(1);
         }
 
+        ScheduledTasks tasks = new ScheduledTasks();
+        tasks.ApacheSoapClientTask();
+
 
 //        ApacheSoapClient apacheSoapClient = new ApacheSoapClient(uri, soapAction, INPUT_FILE);
-
-
-
-
-
-
 //        BufferedReader buffer = new FileLoader().load(INPUT_FILE).asBufferedReader();
 //
 //        Parser parser = new Parser();
@@ -103,12 +96,6 @@ public class Main {
 //        System.out.println(INPUT_FILE);
         /*ApacheSoapClient apacheSoapClient = new ApacheSoapClient(URI, SOAP_ACTION, INPUT_FILE);
         apacheSoapClient.doCall();*/
-
-
-        ScheduledTasks tasks = new ScheduledTasks();
-        tasks.ApacheSoapClientTask();
     }
-
-
 
 }
