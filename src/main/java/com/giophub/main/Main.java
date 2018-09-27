@@ -13,13 +13,13 @@ import java.nio.file.Paths;
 
 
 /**
- * TODO 1 :*: get CMD arguments like: java -jar web-client arg1 arg2 argN
- * TODO 2 :*: load the file name and read it
- * TODO 3 :*: call the web service / application
- * TODO 4 :*: get the response / content response
- * TODO 5 :*: save the content response on file / logfile
- * TODO 6 :*: track the response execution time
- * TODO 7 :*: schedule to ApacheSoapClientTask this application N-times with spring scheduler and count the request number
+ *
+ *
+ *
+ * TODO 4 :: get the response / content response
+ * TODO 5 :: save the content response on file / logfile
+ * TODO 6 :: track the response execution time
+ * TODO 7 :: schedule to ApacheSoapClientTask this application N-times with spring scheduler and count the request number
  * */
 
 
@@ -36,13 +36,12 @@ public class Main {
     public static String REQUEST = "";
 
     public static void main(String argv[]) throws Exception {
+        // check input arguments
         if (argv.length > 3) {
-            System.out.println("Usage: java -classpath <classpath> [-Dorg.apache.commons.logging.simplelog.defaultlog=<loglevel>] PostSOAP <url> <soapaction> <filename>]");
-            System.out.println("<classpath> - must contain the commons-httpclient.jar and commons-logging.jar");
-            System.out.println("<loglevel> - one of error, warn, info, debug, trace");
-            System.out.println("<url> - the URL to post the file to");
+            System.out.println("Usage: java -jar <uri> <filename> <soapaction>");
+            System.out.println("<uri> - the URI where is located the web service");
+            System.out.println("<filename> - file containing the SOAP request");
             System.out.println("<soapaction> - the SOAP action header value");
-            System.out.println("<filename> - file to post to the URL");
             System.out.println();
             System.exit(1);
         }
@@ -54,10 +53,12 @@ public class Main {
         LOGGER.info("Summary of arguments\n" +
                 "\tURI: {}\n\tSoapAction: {}\n\tInput file: {}", URI, SOAP_ACTION, INPUT_FILE);
 
+        // get the application path and the build full file path
         String path = new File(".").getCanonicalPath();
         path = Paths.get(path, INPUT_FILE).toString();
         LOGGER.debug("Path: {}", path);
 
+        // read the content of file, that is the request
         try {
             FileReader reader = new FileReader(path);
             BufferedReader buffer = new BufferedReader(reader);
@@ -69,33 +70,9 @@ public class Main {
             System.exit(1);
         }
 
+        // schedule web client tasks
         ScheduledTasks tasks = new ScheduledTasks();
         tasks.ApacheSoapClientTask();
-
-
-//        ApacheSoapClient apacheSoapClient = new ApacheSoapClient(uri, soapAction, INPUT_FILE);
-//        BufferedReader buffer = new FileLoader().load(INPUT_FILE).asBufferedReader();
-//
-//        Parser parser = new Parser();
-//        parser.asBufferedReader(buffer);
-
-
-
-//        HttpWebClient httpWebClient = new HttpWebClient();
-//        httpWebClient.setsURL("http://localhost:8080/pages/readme.html");
-//        httpWebClient.setsURL("http://localhost:8080/SampleServletWithParameters");
-//        httpWebClient.ApacheGetClient();
-//        httpWebClient.ApacheClientWithResponseHandling();
-//        httpWebClient.ApacheClientWithManualConnectionRelease();
-//        httpWebClient.ApachePostClient();
-
-
-//        URI = "http://ec.europa.eu/eurostat/SDMX/diss-ws/NSIStdV20Service";
-//        URI = "http://www.acceptance.ec.europa.eu/eurostat/SDMX/diss-ws/NSIStdV20Service";
-//        INPUT_FILE = parser.asString(buffer);
-//        System.out.println(INPUT_FILE);
-        /*ApacheSoapClient apacheSoapClient = new ApacheSoapClient(URI, SOAP_ACTION, INPUT_FILE);
-        apacheSoapClient.doCall();*/
     }
 
 }

@@ -1,10 +1,12 @@
 package com.giophub.task.java;
 
+import com.giophub.commons.utils.PropertiesLoader;
 import com.giophub.main.Main;
 import com.giophub.web.client.ApacheSoapClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,6 +16,10 @@ public class ScheduledTasks {
     private Integer ApacheSoapClientAcc = 0;
 
     public void ApacheSoapClientTask() {
+        Properties properties = PropertiesLoader.loadProperties("app.properties");
+        long delay =  Long.parseLong(properties.getProperty("java.task.delay"));
+        long period = Long.parseLong(properties.getProperty("java.task.period"));
+
 
         TimerTask task = new TimerTask() {
             @Override
@@ -25,7 +31,7 @@ public class ScheduledTasks {
         };
 
         try {
-            timer.schedule(task, 10, 60000);
+            timer.schedule(task, delay, period);
         } catch (Exception e){
             timer.cancel();
 
@@ -34,5 +40,4 @@ public class ScheduledTasks {
             System.exit(1);
         }
     }
-
 }
