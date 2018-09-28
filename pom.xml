@@ -69,16 +69,16 @@
 
         <sourceDirectory>${project.basedir}/src/main/java/</sourceDirectory>
         <resources>
-            <resource>
+            <resource> <!-- FILTERED RESOURCES -->
                 <filtering>true</filtering>
-                <directory>${project.basedir}/src/main/resources/</directory>
+                <directory>${project.basedir}/src/main/resources/app.settings</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>
             </resource>
-            <resource>
-                <filtering>true</filtering>
-                <directory>${project.basedir}/src/main/resources/app.settings/</directory>
+            <resource> <!-- STATIC RESOURCES -->
+                <filtering>false</filtering>
+                <directory>${project.basedir}/src/main/resources/test</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>

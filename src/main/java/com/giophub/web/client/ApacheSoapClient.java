@@ -1,5 +1,6 @@
 package com.giophub.web.client;
 
+import com.giophub.main.Main;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 
@@ -66,7 +68,7 @@ public class ApacheSoapClient {
                 String fileName;
 //                fileName = disposition.replaceFirst("(?i)^.*filename=\"([^\"]+)\".*$", "$1");
                 fileName = "content-response.xml";
-                fileName = "C:\\_logs\\myDIR\\file\\" + fileName;
+                fileName = Paths.get(Main.RUNTIME_PATH, fileName).toString();
                 LOGGER.debug("Output filename: {}", fileName);
 
                 // write the response on filesystem

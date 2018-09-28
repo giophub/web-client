@@ -33,6 +33,7 @@ public class Main {
     public static String SOAP_ACTION = "";
 
     // fields
+    public static String RUNTIME_PATH;
     public static String REQUEST = "";
 
     public static void main(String argv[]) throws Exception {
@@ -54,9 +55,9 @@ public class Main {
                 "\tURI: {}\n\tSoapAction: {}\n\tInput file: {}", URI, SOAP_ACTION, INPUT_FILE);
 
         // get the application path and the build full file path
-        String path = new File(".").getCanonicalPath();
-        path = Paths.get(path, INPUT_FILE).toString();
-        LOGGER.debug("Path: {}", path);
+        RUNTIME_PATH = new File(".").getCanonicalPath();
+        String path = Paths.get(RUNTIME_PATH, INPUT_FILE).toString();
+        LOGGER.debug("Request Path: {}", path);
 
         // read the content of file, that is the request
         try {
