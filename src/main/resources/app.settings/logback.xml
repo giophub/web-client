@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<configuration debug="false"> <!-- true : if you want to debug logback startup settings -->
-    <!--<property resource="app.settings/app.properties"/>-->
+<configuration debug="true"> <!-- true : if you want to debug logback startup settings -->
+    <property resource="app.properties"/>
 
     <appender name="STDOUT"
               class="ch.qos.logback.core.ConsoleAppender">
@@ -10,36 +10,11 @@
         </encoder>
     </appender>
 
-    <appender name="GLOBAL"
+    <appender name="${log.appender.global}"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<file>C:\\_logs\\tasks\\global.log</file>-->
-        <!--<file>C:/_logs/tasks/global.log</file>-->
-        <file>/ec/stress/server/comext-local/performance-test/global.log</file>
+        <file>${log.file.global}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>/ec/stress/server/comext-local/performance-test/global-%i.log.zip</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>200</maxIndex>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>50MB</maxFileSize>
-        </triggeringPolicy>
-
-        <encoder>
-            <Pattern>
-                %d{ISO8601} [%thread] %-5level %logger{35}:%line - %msg%n
-            </Pattern>
-            <!--<immediateFlush>true</immediateFlush>-->
-        </encoder>
-    </appender>
-
-    <appender name="TASKS"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/ec/stress/server/comext-local/performance-test/tasks.log</file>
-        <!--<file>C:/_logs/tasks/tasks.log</file>-->
-        <!--<file>${log.file.global}</file>-->
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <!--<fileNamePattern>C:/_logs/tasks/tasks-%i.log.zip</fileNamePattern>-->
-            <fileNamePattern>/ec/stress/server/comext-local/performance-test/tasks-%i.log.zip</fileNamePattern>
+            <fileNamePattern>${log.file.global.pattern}</fileNamePattern>
             <minIndex>1</minIndex>
             <maxIndex>200</maxIndex>
         </rollingPolicy>
@@ -63,21 +38,14 @@
 
     <!-- Error Logger -->
     <root level="ERROR">
-        <appender-ref ref="GLOBAL"/>
+        <appender-ref ref="${log.appender.global}"/>
         <appender-ref ref="STDOUT"/>
     </root>
 
     <!-- APPLICATION LOGGERS -->
-    <logger name="com.giophub" level="DEBUG" additivity="false">
-        <appender-ref ref="GLOBAL"/>
+    <logger name="com.giophub" level="${log.level.global}" additivity="false">
+        <appender-ref ref="${log.appender.global}"/>
         <appender-ref ref="STDOUT"/>
     </logger>
-    <logger name="com.giophub.task" level="INFO" additivity="true">
-        <appender-ref ref="TASKS"/>
-    </logger>
-    <logger name="com.giophub.web.client" level="INFO" additivity="true">
-        <appender-ref ref="TASKS"/>
-    </logger>
-
 
 </configuration>
