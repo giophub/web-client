@@ -143,8 +143,8 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>
-                &lt;!&ndash; Build an executable JAR &ndash;&gt;
+            <!-- Build an executable JAR -->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
@@ -157,7 +157,8 @@
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>-->
+            </plugin>
+            <!-- buil jar with maven dependencies -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
