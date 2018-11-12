@@ -1,6 +1,7 @@
 package com.giophub.main;
 
 import com.giophub.task.java.ScheduledTasks;
+import com.giophub.web.client.JaxWsClient;
 import com.giophub.xml.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,9 +72,11 @@ public class Main {
             System.exit(1);
         }
 
+        new JaxWsClient(URI, SOAP_ACTION, REQUEST).doCall();
+
         // schedule web client tasks
-        ScheduledTasks tasks = new ScheduledTasks();
-        tasks.ApacheSoapClientTask();
+/*        ScheduledTasks tasks = new ScheduledTasks();
+        tasks.ApacheSoapClientTask();*/
     }
 
 }

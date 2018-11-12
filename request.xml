@@ -1,27 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-                  xmlns:ns="http://ec.europa.eu/eurostat/sri/service/2.0/"
-                  xmlns:mes="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message"
-                  xmlns:reg="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/registry"
-                  xmlns:str="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/structure"
-                  xmlns:com="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/common">
-
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ext="http://estat.ec.europa.eu/disschain/soap/extraction" xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query" xmlns:ext1="http://estat.ec.europa.eu/disschain/extraction" xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common">
     <soapenv:Header/>
-
     <soapenv:Body>
-        <ns:QueryStructure>
-            <mes:RegistryInterface>
-                <mes:Header>
-                    <mes:ID>QUERY</mes:ID>
-                    <mes:Test>false</mes:Test>
-                    <mes:Prepared>2012-09-14</mes:Prepared>
-                    <mes:Sender id="SENDER"></mes:Sender>
-                </mes:Header>
-                <mes:QueryStructureRequest resolveReferences="true">
-                    <reg:DataflowRef/>
-                </mes:QueryStructureRequest>
-            </mes:RegistryInterface>
-        </ns:QueryStructure>
+        <ext:data>
+            <query>
+                <quer:ReturnDetails/>
+                <quer:DataWhere>
+                    <quer:Dataflow>
+                        <Ref agencyID="ESTAT" id="T2020" version="1.0"/>
+                    </quer:Dataflow>
+                </quer:DataWhere>
+            </query>
+            <format name="json">
+                <language>en</language>
+            </format>
+        </ext:data>
     </soapenv:Body>
 </soapenv:Envelope>
