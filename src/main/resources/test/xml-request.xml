@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
                   xmlns:ns="http://ec.europa.eu/eurostat/sri/service/2.0/"
                   xmlns:mes="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message"

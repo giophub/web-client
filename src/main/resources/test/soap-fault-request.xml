@@ -11,12 +11,12 @@
                 <quer:ReturnDetails/>
                 <quer:DataWhere>
                     <quer:Dataflow>
-                        <Ref agencyID="ESTAT" id="T2020_20" version="1.0"/>
+                        <Ref agencyID="ESTAT" id="BOP_FDI_STR_FALSE" version="1.0"/>
                     </quer:Dataflow>
                 </quer:DataWhere>
             </query>
-            <format name="json">
-                <language>en</language>
+            <format name="JSONP">
+                <language>EN</language>
             </format>
         </ext:data>
     </soapenv:Body>

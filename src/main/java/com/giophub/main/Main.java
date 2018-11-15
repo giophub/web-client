@@ -65,18 +65,18 @@ public class Main {
             FileReader reader = new FileReader(path);
             BufferedReader buffer = new BufferedReader(reader);
             REQUEST = new Parser().asString(buffer);
-            LOGGER.info("HTTP request\n\n {}", REQUEST);
+            LOGGER.info("HTTP String request\n\n {}", REQUEST);
         } catch (Exception e) {
             LOGGER.error("full path file did not find." + e.getMessage());
             LOGGER.info("Exiting from the application...");
             System.exit(1);
         }
 
-        new JaxWsClient(URI, SOAP_ACTION, REQUEST).doCall();
+//        new JaxWsClient(URI, SOAP_ACTION, REQUEST).doCall();
 
         // schedule web client tasks
-/*        ScheduledTasks tasks = new ScheduledTasks();
-        tasks.ApacheSoapClientTask();*/
+        ScheduledTasks tasks = new ScheduledTasks();
+        tasks.ApacheSoapClientTask();
     }
 
 }
