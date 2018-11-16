@@ -2,6 +2,7 @@ package com.giophub.main;
 
 import com.giophub.task.java.ScheduledTasks;
 import com.giophub.web.client.JaxWsClient;
+import com.giophub.web.client.impl.ApacheHttpSoapClient;
 import com.giophub.xml.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -75,8 +78,19 @@ public class Main {
 //        new JaxWsClient(URI, SOAP_ACTION, REQUEST).doCall();
 
         // schedule web client tasks
-        ScheduledTasks tasks = new ScheduledTasks();
-        tasks.ApacheSoapClientTask();
+//        ScheduledTasks tasks = new ScheduledTasks();
+//        tasks.ApacheSoapClientTask();
+
+
+        Map<String, String> headerElements = new HashMap<>();
+        headerElements.put("Content-Type", "text/xml");
+        headerElements.put("Accept", "text/xml");
+        headerElements.put("SOAPAction", SOAP_ACTION);
+//            headerElements.put("Content-Disposition", "attachment; filename=\"export.xml\"");
+
+        ApacheHttpSoapClient soapClient = new ApacheHttpSoapClient(URI, REQUEST, true, headerElements);
+        String soapResponse = soapClient.getSoapResponse();
+        System.out.println("SOAP Response: " + soapResponse);
     }
 
 }
