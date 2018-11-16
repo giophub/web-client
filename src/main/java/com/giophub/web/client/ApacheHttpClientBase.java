@@ -1,10 +1,13 @@
 package com.giophub.web.client;
 
+import com.giophub.main.Main;
 import com.sun.istack.Nullable;
-import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Map;
 
 public abstract class ApacheHttpClientBase implements ApacheHttpClient {
@@ -51,7 +54,6 @@ public abstract class ApacheHttpClientBase implements ApacheHttpClient {
         logger.debug("Request arguments \n\tURI: {} \n\tChunked: {} \n\tRequest: \n\t\t{}", uri, chunked, request);
     }
 
-
     @Override
     public String getRequest() {
         return null;
@@ -60,5 +62,18 @@ public abstract class ApacheHttpClientBase implements ApacheHttpClient {
     @Override
     public String getResponse() {
         return null;
+    }
+
+    public void writeOnDisk() throws IOException {
+        String fileName;
+        // get file name from response
+//                fileName = disposition.replaceFirst("(?i)^.*filename=\"([^\"]+)\".*$", "$1");
+        fileName = "content-response.xml";
+        fileName = Paths.get(Main.RUNTIME_PATH, fileName).toString();
+        logger.debug("Output filename: {}", fileName);
+
+        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+        fileOutputStream.write(response.getBytes());
+        fileOutputStream.close();
     }
 }

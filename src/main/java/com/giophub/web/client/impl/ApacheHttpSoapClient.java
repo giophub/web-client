@@ -1,6 +1,5 @@
 package com.giophub.web.client.impl;
 
-import com.giophub.main.Main;
 import com.giophub.web.client.ApacheHttpClientBase;
 import com.giophub.xml.Parser;
 import com.sun.istack.Nullable;
@@ -17,11 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -54,19 +51,7 @@ public class ApacheHttpSoapClient extends ApacheHttpClientBase {
         return soapFaultString;
     }
 
-    public void writeOnDisk() throws IOException {
-        String fileName;
-        // get file name from response
-//                fileName = disposition.replaceFirst("(?i)^.*filename=\"([^\"]+)\".*$", "$1");
-        fileName = "content-response.xml";
-        fileName = Paths.get(Main.RUNTIME_PATH, fileName).toString();
-        logger.debug("Output filename: {}", fileName);
 
-        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-        fileOutputStream.write(response.getBytes());
-//                entity.writeTo(fileOutputStream);
-        fileOutputStream.close();
-    }
 
     public void printResponse(HttpEntity entity) throws IOException {
         // convert content response to string
