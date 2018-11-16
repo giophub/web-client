@@ -1,7 +1,6 @@
 package com.giophub.web.client;
 
 import com.giophub.main.Main;
-import com.giophub.pojo.SoapPojo;
 import com.giophub.xml.Parser;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -15,10 +14,14 @@ import org.apache.http.util.EntityUtils;
 import org.jdom.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -190,21 +193,11 @@ public class ApacheSoapClient {
     }
 
     private void getFault(String message) {
-        org.jdom.Document xml = Parser.asJDomocument(Parser.asDocument(IOUtils.toInputStream(message)));
+        Document xml = Parser.asDocument(IOUtils.toInputStream(message));
 
-        String faultCode = null;
-        String faultString = null;
-
-        Iterator $i = xml.getRootElement().getDescendants();
-        while ($i.hasNext()) {
-            Element node = (Element) $i.next();
-            if (node.getName().equalsIgnoreCase("Fault")) {
-                faultCode = node.getChild("faultcode").getText();
-                faultString = node.getChild("faultctring").getText();
-                logger.info("Fault code {}, Fault string: {}", faultCode, faultString);
-                break;
-            }
-        }
+        String faultCode =   xml.getElementsByTagName("faultcode").item(0).getTextContent();
+        String faultString = xml.getElementsByTagName("faultstring").item(0).getTextContent();
+        logger.debug("SOAPFault - faultcode: {}, faultstring: {}", faultCode, faultString);
     }
 
 }

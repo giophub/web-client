@@ -82,7 +82,26 @@ public class Parser {
 
 
     /**
-     * Parse and convert an Input Strem to an XML Document object.
+     * Parse and convert an Input Strem to an W3C DOM Normalized Document object.
+     *
+     * The normalization is optional, but recommended:
+     *             This basically means that the following XML element
+     *             <foo>hello
+     *             wor
+     *             ld</foo>
+     *
+     *             could be represented like this in a denormalized node:
+     *             Element foo
+     *                 Text node: ""
+     *                 Text node: "Hello "
+     *                 Text node: "wor"
+     *                 Text node: "ld"
+     *
+     *            When normalized, the node will look like this:
+     *            Element foo
+     *                 Text node: "Hello world"
+     *
+     *            And the same goes for attributes: <foo bar="Hello world"/>, comments, etc.
      *
      * @param is
      *
@@ -102,30 +121,10 @@ public class Parser {
             logger.error("I/O Exception on parsing XML Document: {}", e.getMessage());
         }
 
+        // normalize the document
+        assert document != null;
+        document.getDocumentElement().normalize();
+
         return document;
     }
-
-    /*private static Document asXml2(InputStream is) throws ParserConfigurationException, IOException, SAXException {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-        dbf.setValidating(false);
-        dbf.setIgnoringComments(false);
-        dbf.setIgnoringElementContentWhitespace(true);
-        dbf.setNamespaceAware(true);
-        // dbf.setCoalescing(true);
-        // dbf.setExpandEntityReferences(true);
-
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        db.setEntityResolver(new NullResolver());
-
-        // db.setErrorHandler( new MyErrorHandler());
-
-        return db.parse(new InputSource(is));
-    }
-    class NullResolver implements EntityResolver {
-        public InputSource resolveEntity(String publicId, String systemId) {
-            return new InputSource(new StringReader(""));
-        }
-    }*/
-
 }

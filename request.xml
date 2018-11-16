@@ -11,7 +11,7 @@
                 <quer:ReturnDetails/>
                 <quer:DataWhere>
                     <quer:Dataflow>
-                        <Ref agencyID="ESTAT" id="T2020_20" version="1.0"/>
+                        <Ref agencyID="ESTAT" id="T2020_20X" version="1.0"/>
                     </quer:Dataflow>
                 </quer:DataWhere>
             </query>
