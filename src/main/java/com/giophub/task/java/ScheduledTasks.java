@@ -2,7 +2,7 @@ package com.giophub.task.java;
 
 import com.giophub.commons.utils.PropertiesLoader;
 import com.giophub.main.Main;
-import com.giophub.web.client.ApacheSoapClient;
+import com.giophub.web.client.impl.ApacheHttpSoapClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class ScheduledTasks {
             public void run() {
                 ApacheSoapClientAcc += 1;
                 LOGGER.info("Execution number {}", ApacheSoapClientAcc);
-                new ApacheSoapClient(Main.URI, Main.SOAP_ACTION, Main.REQUEST).doCall();
+                new ApacheHttpSoapClient(Main.URI, Main.REQUEST, true, null).doCall();
             }
         };
 

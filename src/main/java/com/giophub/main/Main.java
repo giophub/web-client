@@ -91,6 +91,7 @@ public class Main {
         ApacheHttpSoapClient soapClient = new ApacheHttpSoapClient(URI, REQUEST, true, headerElements);
         String soapResponse = soapClient.getSoapResponse();
         System.out.println("SOAP Response: " + soapResponse);
+        soapClient.writeOnDisk();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.giophub.web.client.impl;
 
+import com.giophub.main.Main;
 import com.giophub.web.client.ApacheHttpClientBase;
 import com.giophub.xml.Parser;
 import com.sun.istack.Nullable;
@@ -16,9 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +31,10 @@ import java.util.concurrent.TimeUnit;
 public class ApacheHttpSoapClient extends ApacheHttpClientBase {
     private static final Logger logger = LoggerFactory.getLogger(ApacheHttpSoapClient.class);
 
-    String soapResponse;
+    private String soapResponse;
+    private String soapFaultString;
+    private String soapFaultCode;
+
 
     public ApacheHttpSoapClient(String uri, String message, boolean chunked, @Nullable Map<String, String> headerElements) {
         super.setRequest(uri, message, chunked, headerElements);
@@ -39,6 +45,42 @@ public class ApacheHttpSoapClient extends ApacheHttpClientBase {
     public String getSoapResponse() {
         return soapResponse;
     }
+
+    public String getSoapFaultCode() {
+        return soapFaultCode;
+    }
+
+    public String getSoapFaultString() {
+        return soapFaultString;
+    }
+
+    public void writeOnDisk() throws IOException {
+        String fileName;
+        // get file name from response
+//                fileName = disposition.replaceFirst("(?i)^.*filename=\"([^\"]+)\".*$", "$1");
+        fileName = "content-response.xml";
+        fileName = Paths.get(Main.RUNTIME_PATH, fileName).toString();
+        logger.debug("Output filename: {}", fileName);
+
+        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+        fileOutputStream.write(response.getBytes());
+//                entity.writeTo(fileOutputStream);
+        fileOutputStream.close();
+    }
+
+    public void printResponse(HttpEntity entity) throws IOException {
+        // convert content response to string
+        logger.debug("Start to print the content response");
+        String sContentResponse = EntityUtils.toString(entity);
+        logger.debug(sContentResponse);
+    }
+
+    public void getDisposition(CloseableHttpResponse httpResponse) {
+        // get disposition from response header
+        String disposition = httpResponse.getFirstHeader("Content-Disposition").getValue();
+        logger.debug("Response.getFirstHeader name: {}", disposition);
+    }
+
 
     @Override
     public void doCall() {
@@ -150,11 +192,11 @@ public class ApacheHttpSoapClient extends ApacheHttpClientBase {
     private String getFault(String message) {
         Document xml = Parser.asDocument(IOUtils.toInputStream(message));
 
-        String faultCode =   xml.getElementsByTagName("faultcode").item(0).getTextContent();
-        String faultString = xml.getElementsByTagName("faultstring").item(0).getTextContent();
-        logger.debug("SOAPFault - faultcode: {}, faultstring: {}", faultCode, faultString);
+        soapFaultCode   = xml.getElementsByTagName("faultcode").item(0).getTextContent();
+        soapFaultString = xml.getElementsByTagName("faultstring").item(0).getTextContent();
+        logger.debug("SOAPFault - faultcode: {}, faultstring: {}", soapFaultCode, soapFaultString);
 
-        String errorResponse = faultCode + faultString;
+        String errorResponse = soapFaultCode + " " + soapFaultString;
         return errorResponse;
     }
 
