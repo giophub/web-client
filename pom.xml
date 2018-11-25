@@ -59,6 +59,22 @@
                 <log.max.size.val>5MB</log.max.size.val>
             </properties>
         </profile>
+
+
+        <!-- LINUX -->
+        <profile>
+            <id>MacOS</id>
+            <properties>
+                <build.name>${project.name}</build.name>
+
+                <!-- deployment settings -->
+                <profile.env>MacOS</profile.env>
+
+                <!-- log settings -->
+                <log.directory.val>${project.basedir}/logs</log.directory.val>
+                <log.level.val>DEBUG</log.level.val>
+            </properties>
+        </profile>
     </profiles>
 
 

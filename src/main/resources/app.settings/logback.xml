@@ -10,41 +10,65 @@
         </encoder>
     </appender>
 
-    <appender name="${log.appender.global}"
+    <appender name="${GLOBAL.log.name}"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.file.global}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${log.file.global.pattern}</fileNamePattern>
+            <fileNamePattern>${GLOBAL.log.file.name}</fileNamePattern>
             <minIndex>1</minIndex>
-            <maxIndex>200</maxIndex>
+            <maxIndex>${GLOBAL.log.max.index}</maxIndex>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>50MB</maxFileSize>
+            <maxFileSize>${GLOBAL.log.max.size}</maxFileSize>
         </triggeringPolicy>
 
         <encoder>
-            <Pattern>
-                %d{ISO8601} [%thread] %-5level %logger{35}:%line - %msg%n
-            </Pattern>
-            <!--<immediateFlush>true</immediateFlush>-->
+            <Pattern>${GLOBAL.log.style}</Pattern>
+            <immediateFlush>true</immediateFlush>
         </encoder>
     </appender>
 
-    <!-- Logback Logger to WARN Level -->
-    <logger name="ch.qos.logback" level="WARN"/>
+    <appender name="${ERROR.log.name}"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.file.global}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${ERROR.log.file.name}</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${ERROR.log.max.index}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${ERROR.log.max.size}</maxFileSize>
+        </triggeringPolicy>
 
-    <!-- Spring Logger to WARN Level -->
-    <logger name="org.springframework" level="WARN"/>
+        <encoder>
+            <Pattern>${ERROR.log.style}</Pattern>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+    </appender>
+
 
     <!-- Error Logger -->
     <root level="ERROR">
-        <appender-ref ref="${log.appender.global}"/>
+        <appender-ref ref="${ERROR.log.name}"/>
+        <appender-ref ref="${GLOBAL.log.name}"/>
         <appender-ref ref="STDOUT"/>
     </root>
 
+    <!-- Logback Logger to WARN Level -->
+    <logger name="ch.qos.logback" level="WARN">
+        <appender-ref ref="${GLOBAL.log.name}"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- Spring Logger to WARN Level -->
+    <logger name="org.springframework" level="WARN">
+        <appender-ref ref="${GLOBAL.log.name}"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
     <!-- APPLICATION LOGGERS -->
     <logger name="com.giophub" level="${log.level.global}" additivity="false">
-        <appender-ref ref="${log.appender.global}"/>
+        <appender-ref ref="${GLOBAL.log.name}"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
