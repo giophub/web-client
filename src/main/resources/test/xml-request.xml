@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    parameters to run the application:
+    ENDPOINT, REQUEST FILE, SOAP ACTION
+    https://webgate.ec.europa.eu/estat/api/dissemination/1.0/extraction request.xml "" -->
+
+<!-- soap request: -->
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
                   xmlns:ns="http://ec.europa.eu/eurostat/sri/service/2.0/"
                   xmlns:mes="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message"
