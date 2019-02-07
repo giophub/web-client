@@ -1,4 +1,4 @@
-package com.giophub.commons.utils;
+package com.giophub.commons.utils.time;
 
 /**
  * @author Giovanni PERTA

@@ -1,4 +1,4 @@
-package com.giophub.commons.utils;
+package com.giophub.commons.utils.file;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
