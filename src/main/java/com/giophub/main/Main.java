@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String argv[]) throws Exception {
         // check input arguments
-
+        LOGGER.info("Starting main");
     }
 
 }
