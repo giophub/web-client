@@ -1,4 +1,4 @@
-package com.giophub.commons.utils;
+package com.giophub.commons.utils.file;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +18,8 @@ import java.util.ResourceBundle;
  * http://www.koders.com/java/fid5580570D56CD03F7E7ACF8C7968285B8673EA3D9.aspx
  */
 
-public class Loader { // todo : change the logic of this class
-    private static final Logger LOGGER = LoggerFactory.getLogger(Loader.class);
+public class PropertiesLoader { // todo : change the logic of this class
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesLoader.class);
 
 
     private static final boolean THROW_ON_LOAD_FAILURE = true;    // when false if failed to load properties null is

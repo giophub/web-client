@@ -1,30 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<configuration debug="false"> <!-- true : if you want to debug logback startup settings -->
+<configuration debug="true"> <!-- true : if you want to debug logback startup settings -->
     <property resource="app.properties"/>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{ISO8601} [%thread%X{threadId}] %highlight(%-5level) %logger{35}:%line - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="${log.appender.global}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="${log.appender.global}"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.file.global}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>${log.file.global.pattern}</fileNamePattern>
             <minIndex>1</minIndex>
-            <maxIndex>${log.max.index.global}</maxIndex>
+            <maxIndex>200</maxIndex>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>${log.max.size.global}</maxFileSize>
+            <maxFileSize>50MB</maxFileSize>
         </triggeringPolicy>
 
         <encoder>
             <Pattern>
                 %d{ISO8601} [%thread] %-5level %logger{35}:%line - %msg%n
             </Pattern>
-            <immediateFlush>true</immediateFlush>
+            <!--<immediateFlush>true</immediateFlush>-->
         </encoder>
     </appender>
 
@@ -32,7 +34,7 @@
     <logger name="ch.qos.logback" level="WARN"/>
 
     <!-- Spring Logger to WARN Level -->
-    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.springframework" level="WARN"/>
 
     <!-- Error Logger -->
     <root level="ERROR">

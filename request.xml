@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ext="http://estat.ec.europa.eu/disschain/soap/extraction" xmlns:quer="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/query" xmlns:ext1="http://estat.ec.europa.eu/disschain/extraction" xmlns:com="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ext:data>
+            <query>
+                <quer:ReturnDetails/>
+                <quer:DataWhere>
+                    <quer:Dataflow>
+                        <Ref agencyID="ESTAT" id="T2020" version="1.0"/>
+                    </quer:Dataflow>
+                </quer:DataWhere>
+            </query>
+            <format name="json">
+                <language>en</language>
+            </format>
+        </ext:data>
+    </soapenv:Body>
+</soapenv:Envelope>

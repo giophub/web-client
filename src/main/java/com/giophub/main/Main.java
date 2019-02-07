@@ -1,22 +1,18 @@
 package com.giophub.main;
 
-import com.giophub.commons.utils.Loader;
-import com.giophub.xml.Parser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.io.BufferedReader;
 
+
+@EnableScheduling
 public class Main {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-    public static void main(String argv[]) {
+    public static void main(String argv[]) throws Exception {
+        // check input arguments
 
-
-
-        Loader loader = new Loader();
-        BufferedReader bufferedReader = loader.loadAsBufferedReader("files/xml/basic/basic-xml-example.xml");
-
-        Parser parser = new Parser();
-        parser.readAsBufferedReader(bufferedReader);
     }
-
 
 }
