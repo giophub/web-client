@@ -1,4 +1,4 @@
-# maven-kickstart
+# web-client
 
 Step 1: the user info <br>
 // check the user and email of the project <br> 
