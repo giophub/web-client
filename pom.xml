@@ -41,24 +41,7 @@
                 <log.max.index.val>200</log.max.index.val>
                 <log.max.size.val>5MB</log.max.size.val>
             </properties>
-        </profile>
-
-        <!-- LINUX -->
-        <profile>
-            <id>Linux</id>
-            <properties>
-                <build.name>${project.name}_${profile.env}</build.name>
-
-                <!-- deployment settings -->
-                <profile.env>Linux</profile.env>
-
-                <!-- log settings -->
-                <log.directory.val>/ec/stress/server/comext-local/performance-test</log.directory.val>
-                <log.level.val>INFO</log.level.val>
-                <log.max.index.val>200</log.max.index.val>
-                <log.max.size.val>5MB</log.max.size.val>
-            </properties>
-        </profile>
+             </profile>
     </profiles>
 
 
